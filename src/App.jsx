@@ -2,10 +2,15 @@ import { useState } from 'react'
 import Form from './components/Form'
 import Header from './components/Header'
 import ListPatients from './components/ListPatients'
+import { useEffect } from 'react'
 
 const App = () => {
-  const [patients, setPatients] = useState([])
+  const [patients, setPatients] = useState(JSON.parse(localStorage.getItem('patients')) ?? [])
   const [patient, setPatient] = useState({})
+
+  useEffect(() => {
+    localStorage.setItem('patients', JSON.stringify(patients))
+  }, [patients])
 
   const deletePatient = id => {
     const response = confirm('¿Deseas eliminar un paciente?')
