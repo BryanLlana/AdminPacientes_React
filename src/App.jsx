@@ -4,11 +4,11 @@ import ListPatients from './components/ListPatients'
 
 const App = () => {
   return (
-    <>
+    <div className='container mx-auto mt-10'>
       <Header /> 
       <Form />
       <ListPatients />
-    </>
+    </div>
   )
 }
 
