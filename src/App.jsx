@@ -6,7 +6,7 @@ const App = () => {
   return (
     <div className='container mx-auto mt-10'>
       <Header /> 
-      <div className='mt-12 md:flex px-4 md:px-0'>
+      <div className='mt-12 md:flex md:gap-5 px-4 md:px-0'>
         <Form />
         <ListPatients />
       </div>
