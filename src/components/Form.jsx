@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Alert from "./Alert"
+import { generateId } from "../helpers"
 
 const Form = ({ patients, setPatients }) => {
   const [name, setName] = useState('')
@@ -19,7 +20,7 @@ const Form = ({ patients, setPatients }) => {
       }, 3000)
       return
     }
-    const patient = {name, ownerName, email, date, symptoms}
+    const patient = {id: generateId(), name, ownerName, email, date, symptoms}
     setPatients([...patients, patient])
 
     setName('')
