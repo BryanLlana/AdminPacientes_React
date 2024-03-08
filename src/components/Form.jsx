@@ -1,14 +1,27 @@
 import { useState } from "react"
 import Alert from "./Alert"
 import { generateId } from "../helpers"
+import { useEffect } from "react"
 
-const Form = ({ patients, setPatients }) => {
+const Form = ({ patient, patients, setPatients }) => {
+  const [id, setId] = useState('')
   const [name, setName] = useState('')
   const [ownerName, setOwnerName] = useState('')
   const [email, setEmail] = useState('')
   const [date, setDate] = useState('')
   const [symptoms, setSymptoms] = useState('')
   const [alert, setAlert] = useState(false)
+
+  useEffect(() => {
+    if (Object.values(patient).length > 0) {
+      setId(patient.id)
+      setName(patient.name)
+      setOwnerName(patient.ownerName)
+      setEmail(patient.email)
+      setDate(patient.date)
+      setSymptoms(patient.symptoms)
+    }
+  }, [patient])
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -20,9 +33,20 @@ const Form = ({ patients, setPatients }) => {
       }, 3000)
       return
     }
-    const patient = {id: generateId(), name, ownerName, email, date, symptoms}
-    setPatients([...patients, patient])
+    const patient = {name, ownerName, email, date, symptoms}
+    
+    if (id) {
+      const patientsUpdate = patients.map(p => p.id === id ? {
+        ...patient,
+        id
+      } : p )
+      setPatients(patientsUpdate)
+    } else {
+      patient.id = generateId()
+      setPatients([...patients, patient])
+    }
 
+    setId('')
     setName('')
     setOwnerName('')
     setEmail('')
@@ -116,7 +140,7 @@ const Form = ({ patients, setPatients }) => {
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white text-lg font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
-          value="Agregar Paciente"
+          value={id ? 'Guardar Cambios' : 'Agregar Paciente'}
         />
       </form>
     </div>

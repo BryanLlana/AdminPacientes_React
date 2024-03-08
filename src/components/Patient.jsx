@@ -1,6 +1,6 @@
 import { formatDate } from "../helpers"
 
-const Patient = ({patient}) => {
+const Patient = ({patient, setPatient}) => {
   return (
     <div className="mt-4 bg-white shadow-md px-5 py-5 rounded-xl space-y-1">
       <p className="font-bold text-gray-700">Nombre:
@@ -18,6 +18,19 @@ const Patient = ({patient}) => {
       <p className="font-bold text-gray-700">Síntomas:
         <span className="font-normal"> {patient.symptoms}</span>
       </p>
+
+      <div className="pt-3 flex gap-5 justify-between md:justify-normal">
+        <button
+          className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg" type="button"
+          onClick={() => setPatient(patient)}
+        >Editar
+        </button>
+        <button
+          className="py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg"
+          type="button"
+        >Eliminar
+        </button>
+      </div>
     </div>
   )
 }
